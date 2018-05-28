@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<message xmlns="http://s2it.ehb.be/messages"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation ="http://s2it.ehb.be/messages http://dtsw.ehb.be/~jan.moriaux/xml/EventMessage.xsd"
+  typeId="2" timestamp="2018-12-31T20:00:00+02:00" senderUUID="42914173-2e64-4aaf-bd9a-65921ae2cda8"
+>
+  <uuid>2adfeeb7-edbf-4975-a1b4-a89189989a6e</uuid>
+  <version>1</version>
+  <isActive>true</isActive>
+  <name>EhackBv5</name>
+  <description>Beschrijving voor Ehackbv5</description>
+  <startTime>2018-12-31T20:00:00+02:00</startTime>
+  <endTime>2018-12-31T20:00:00+02:00</endTime>
+</message>

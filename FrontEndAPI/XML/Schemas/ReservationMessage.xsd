@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://s2it.ehb.be/messages"
+           xmlns:messages="http://s2it.ehb.be/messages"
+           xmlns="http://s2it.ehb.be/messages"
+           elementFormDefault="qualified"
+           >
+  <!-- include base message schema -->
+  <xs:include schemaLocation="./BaseMessage.xsd" />
+  <!-- /include base message schema -->
+
+ 
+  <!-- complex types-->
+
+  <!-- ReservationMessage declaration -->
+  <xs:complexType name="ReservationMessage">
+    <xs:annotation>
+      <xs:documentation>ReservationMessage: extension from BaseMessage</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="messages:BaseMessage">
+        <xs:sequence>
+          <xs:element name="activityUUID" type="messages:UUID" />
+          <xs:element name="visitorUUID" type="messages:UUID" />
+          <xs:element name="payedFee" type="xs:boolean" />
+          <xs:element name="hasAttended" type="xs:boolean" />
+          <xs:element name="withInvoice" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- /ReservationMessage declaration -->
+  <!-- /complex types-->
+
+  <!-- root element declaration -->
+  <xs:element name="message" type="messages:ReservationMessage" />
+  <!-- /root element declaration -->
+</xs:schema>

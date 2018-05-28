@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<message xmlns="http://s2it.ehb.be/messages"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation ="http://s2it.ehb.be/messages http://dtsw.ehb.be/~jan.moriaux/xml/ReservationMessage.xsd"
+  typeId="4" timestamp="2018-12-31T20:00:00+02:00" senderUUID="0f7b5862-1ab8-4017-a908-5b2b9559dfab"
+>
+  <uuid>2adfeeb7-edbf-4975-a1b4-a89189989a6e</uuid>
+  <version>1</version>
+  <isActive>true</isActive>
+  <activityUUID>1329836f-ded8-4ead-b5bc-ecdd45bda2a7</activityUUID>
+  <visitorUUID>9cd64d37-9546-41c3-8e44-019dda6308cc</visitorUUID>
+  <payedFee>false</payedFee>
+  <hasAttended>false</hasAttended>
+  <withInvoice>true</withInvoice>
+</message>

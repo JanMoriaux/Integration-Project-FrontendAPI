@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://s2it.ehb.be/messages"
+           xmlns:messages="http://s2it.ehb.be/messages"
+           xmlns="http://s2it.ehb.be/messages"
+           elementFormDefault="qualified"
+           >
+  <!-- include base message schema -->
+  <xs:include schemaLocation="./BaseMessage.xsd" />
+  <!-- /include base message schema -->
+
+  <!--simple types-->
+  <xs:simpleType name="Email" >
+    <xs:annotation>
+      <xs:documentation>Email address</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="500" />
+      <xs:pattern value="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="HouseNumber">
+    <xs:annotation>
+      <xs:documentation>Housenumber between 1 and 10000</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:positiveInteger">
+      <xs:minInclusive value="1" />
+      <xs:maxInclusive value="10000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Bus" >
+    <xs:annotation>
+      <xs:documentation>Bus string value maxLength=24 minLength=1</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="24" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Zipcode" >
+    <xs:annotation>
+      <xs:documentation>Zipcode between 1000 and 9999</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:positiveInteger">
+      <xs:minInclusive value="1000" />
+      <xs:maxInclusive value="9999"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Role">
+    <xs:annotation>
+      <xs:documentation>String from User Rol enum: Visitor,Admin,Stakeholder,Speaker or Staff</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Visitor" />
+      <xs:enumeration value="Admin" />
+      <xs:enumeration value="Stakeholder" />
+      <xs:enumeration value="Speaker" />
+      <xs:enumeration value="Staff" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!--/simple types-->
+
+  <!-- complex types-->
+
+  <!-- roles enum -->
+  <xs:complexType name="Roles">
+    <xs:annotation>
+      <xs:documentation>A set of unique user roles</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="role" type="messages:Role" minOccurs="1" maxOccurs="5">
+      
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- /roles enum -->
+
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element name="street" type="messages:MultiPurposeName" />
+      <xs:element name="number" type="messages:HouseNumber" />
+      <xs:element name="bus" type="messages:Bus" minOccurs="0" nillable="true" />
+      <xs:element name="zipCode" type="messages:Zipcode" />
+      <xs:element name="city" type="messages:MultiPurposeName" />
+    </xs:sequence>
+  </xs:complexType>
+  
+
+  <!-- bringing it all together -->
+  <xs:complexType name="UserMessage">
+    <xs:annotation>
+      <xs:documentation>UserMessage: extension from BaseMessage</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="messages:BaseMessage">
+        <xs:sequence>
+          <xs:element name="firstName" type="messages:MultiPurposeName">
+            <xs:annotation>
+              <xs:documentation>The user's first name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="lastName" type="messages:MultiPurposeName">
+            <xs:annotation>
+              <xs:documentation>The user's last name</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="email" type="messages:Email">
+            <xs:annotation>
+              <xs:documentation>The user's email address</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="address" type="messages:Address">
+            <xs:annotation>
+              <xs:documentation>The user's address</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="roles" type="messages:Roles">
+            <xs:annotation>
+              <xs:documentation>The user's roles</xs:documentation>
+            </xs:annotation>
+            <xs:unique name="role_unique">
+              <xs:selector xpath="messages:role" />
+              <xs:field xpath="." />
+            </xs:unique>
+          </xs:element>
+          <xs:element name="emailVerified" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Whether the user has activated his account via email or not</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- /bringing it all together -->
+  <!-- /complex types-->
+
+  <!-- root element declaration -->
+  <xs:element name="message" type="messages:UserMessage" />
+  <!-- /root element declaration -->
+</xs:schema>

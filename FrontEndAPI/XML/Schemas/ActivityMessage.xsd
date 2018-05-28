@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://s2it.ehb.be/messages"
+           xmlns:messages="http://s2it.ehb.be/messages"
+           xmlns="http://s2it.ehb.be/messages"
+           elementFormDefault="qualified"
+           >
+  <!-- include base message schema -->
+  <xs:include schemaLocation="./PlannedEntityMessage.xsd" />
+  <!-- /include base message schema -->
+
+  <!-- simple types -->
+  <xs:simpleType name="Price">
+    <xs:annotation>
+      <xs:documentation>Price field for an acitivity: 2 fraction digits positive float</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:maxInclusive value="99999" />
+      <xs:minInclusive value="0" />
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- simple types -->
+
+
+
+  <!-- complex types -->
+  <xs:complexType name="ActivityMessage">
+    <xs:annotation>
+      <xs:documentation>ActivityMessage: extension from PlannedEntityMessage</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="messages:PlannedEntityMessage">
+        <xs:sequence>
+          <xs:element name="eventUUID" type="messages:UUID" />
+          <xs:element name="speakerUUID" type="messages:UUID" minOccurs="0" nillable="true"/>
+          <xs:element name="price" type="messages:Price"/>
+          <xs:element name="remainingCapacity" type="xs:positiveInteger"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- complex types -->
+
+  <xs:element name="message" type="ActivityMessage" />
+</xs:schema>
+

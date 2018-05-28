@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://s2it.ehb.be/messages"
+           xmlns:messages="http://s2it.ehb.be/messages"
+           elementFormDefault="qualified"
+           >
+
+  <!--simple type definitions-->
+  <xs:simpleType name="TimeStamp">
+    <xs:annotation>
+      <xs:documentation>Timestamp with time zone offset information. Expects format like '2018-12-31T00:00:00+01:00'.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^((19|20)[0-9][0-9])[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T]([01][0-9]|[2][0-3])[:]([0-5][0-9])[:]([0-5][0-9])([+|-]([01][0-9]|[2][0-3])[:]([0-5][0-9]))$" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UUID">
+    <xs:annotation>
+      <xs:documentation>UUID with format '2adfeeb7-edbf-4975-a1b4-a89189989a6e'</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89ABab][0-9a-fA-F]{3}-[0-9a-f]{12}$" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MultiPurposeName" >
+    <xs:annotation>
+      <xs:documentation>Used for firstname, lastname, cityname,.... maxLenght = 500 and minLength = 2</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="500" />
+      <xs:minLength value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- /simple type definitions-->
+
+  <!-- complex type definitions-->
+  
+  <!-- base message definition -->
+  <xs:complexType name="BaseMessage">
+   
+    <!-- base message children -->
+    <xs:sequence>
+      <xs:element name="uuid" type="messages:UUID">
+        <xs:annotation>
+          <xs:documentation>The UUID of the entity contained in the message</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="version" type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>The version number of the entity contained in the message</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="isActive" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>A boolean flag describing the soft delete status of the entity contained in the message</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <!-- /base message children -->
+    
+    <!-- base message attibutes -->
+    <xs:attribute name="typeId" use="required" type="xs:positiveInteger">
+      <xs:annotation>
+        <xs:documentation>The type id of the message.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="timestamp" use="required" type="messages:TimeStamp">
+      <xs:annotation>
+        <xs:documentation>The message timestamp.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="senderUUID" use="required" type="messages:UUID">
+      <xs:annotation>
+        <xs:documentation>The UUID of the sender system</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <!-- /base message attibutes -->
+    
+  </xs:complexType>
+  <!-- /base message definition -->
+  <!-- /complex type definitions-->
+</xs:schema>

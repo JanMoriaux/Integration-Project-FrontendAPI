@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://s2it.ehb.be/messages"
+           xmlns:messages="http://s2it.ehb.be/messages"
+           xmlns="http://s2it.ehb.be/messages"
+           elementFormDefault="qualified"
+           >
+  <!-- include base message schema -->
+  <xs:include schemaLocation="./BaseMessage.xsd" />
+  <!-- /include base message schema -->
+
+  <!-- complex types -->
+  <xs:complexType name="PlannedEntityMessage">
+    <xs:annotation>
+      <xs:documentation>PlannedEntityMessage: extension from BaseMessage. Base message for mesages with a name, description, starttime and endtime (e.g. EventMessage,ActivityMessage)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="messages:BaseMessage">
+        <xs:sequence>
+          <xs:element name="name" type="messages:MultiPurposeName" />
+          <xs:element name="description" type="messages:MultiPurposeName" />
+          <xs:element name="startTime" type="messages:TimeStamp" />
+          <xs:element name="endTime" type="messages:TimeStamp" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- complex types -->
+</xs:schema>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<message xmlns="http://s2it.ehb.be/messages"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation ="http://s2it.ehb.be/messages http://dtsw.ehb.be/~jan.moriaux/xml/UserMessage.xsd"
+  typeId="1" timestamp="2018-12-31T20:00:00+02:00" senderUUID="42914173-2e64-4aaf-bd9a-65921ae2cda8"
+>
+  <uuid>9cd64d37-9546-41c3-8e44-019dda6308cc</uuid>
+  <version>1</version>
+  <isActive>false</isActive>
+  <firstName>Jan</firstName>
+  <lastName>Moriaux</lastName>
+  <email>jan.moriaux@hotmail.com</email>
+  <address>
+    <street>Melkweide</street>
+    <number>37</number>
+    <zipCode>9030</zipCode>
+    <city>Mariakerke</city>
+  </address>
+  <roles>
+    <role>Visitor</role>
+    <role>Admin</role>
+    <role>Speaker</role>
+  </roles>
+  <emailVerified>false</emailVerified>
+</message>
