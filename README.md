@@ -1,0 +1,2 @@
+# Integration-Project-FrontendAPI
+ASP.NET core Web API for the Integration Project course (building an event reservation system consisting of a frontend-, cash register-, CRM- and invoice-subsystem). To be consumed by the WordPress frontend. Pushes messages to a RabbitMQ instance. The incorporated IHostedService consumes XML messages from the same queue. An email service notifies users when they make a new event reservation.
